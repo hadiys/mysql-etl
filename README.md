@@ -105,20 +105,26 @@ quit
 1. Start the MySQL server
 mysql.server start
 
-2. Download the JSON data from the weather API:
+2. Activate the virtual environment
+source path/to/venv/activate
+
+2. Separately run extract_weathercodes.py, populating the weather codes table once only:
+python3 extract_weathercodes.py resources/wttr-codes.json
+
+3. Download the weather data from the weather API:
 wget -q -O ./data/your_filename.json https://wttr/in/replace_with_city_name?=format=j1
 
-3. Run the etl script using the following command:
+4. Run the etl script using the following command:
 python3 etl_job.py <path_to_json_file>
 
-4. Log into your MySQL Workbench or mysql command line client then run the following statements to check that the data has been successfully loaded:
+5. Log into your MySQL Workbench or mysql command line client then run the following statements to check that the data has been successfully loaded:
 USE WEATHER
 SELECT * FROM NEAREST_AREA;
 SELECT * FROM CURRENT_CONDITIONS;
 SELECT * FROM DAILY_FORECAST;
 SELECT * FROM HOURLY_FORECAST;
     
-5. Stop the server when done
+6. Stop the server when done
 mysql.server stop
 
 # ETL Process Description #
