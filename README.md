@@ -45,6 +45,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 ----
 
 <h2 id="installation">Installation</h2>
+
 1. Clone the repository and go to its root directory:
 
     ```bash
@@ -94,7 +95,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
     `mysql -u root -p `
     
     Recreate the database and check that it was successfully created:
-    ```bash    
+   ```bash
     > source weatherdb_backup.sql;
     > USE WEATHER;
     > SHOW TABLES;
@@ -104,8 +105,8 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 ----
 
 <h2 id="configuration">Configuration</h2>
-1. Create the `.env` file in the root of the project:
 
+1. Create the `.env` file in the root of the project:
     ```bash
     touch .env
     ```
@@ -134,6 +135,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 ----
 
 <h2 id="usage">Usage</h2>
+
 1. Populate the weather codes table (once only):
     
     ```bash
