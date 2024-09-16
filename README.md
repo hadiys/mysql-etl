@@ -26,6 +26,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 ----
 
 <h2 id="features">Features</h2>
+
 1. Versatile extraction and load (configurable list of columns and values)
 2. Transactional (all or none)
 3. Error & progress logging
@@ -35,6 +36,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 ----
 
 <h2 id="technologies-used">Technologies Used</h2>
+
 1. Database: MySQL
 2. Programming Language: Python
 3. Packages: mysql-connector, json
