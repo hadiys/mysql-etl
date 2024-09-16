@@ -66,72 +66,68 @@ python3 -m venv <your_venv_name>
 
 **On Mac:**
 
-- `brew install mysql@8.0`
+`brew install mysql@8.0`
 
--  To use MySQL commands without specifying the full path, you need to link it:
+To use MySQL commands without specifying the full path, you need to link it:
 
-    `brew link mysql@8.0 --force `
+`brew link mysql@8.0 --force `
 
-- Run secure installation and set a password for the DB root user:
+Run secure installation and set a password for the DB root user:
+`mysql_secure_installation`
 
-    `mysql_secure_installation`
-
-    - Choose 'Y' for 'Set root password?' and enter your password
-    - Save it for later to connect to the database 
-    - Choose 'Y' for all the questions afterwards
+> Choose 'Y' for 'Set root password?' and enter your password. Save it for later to connect to the database 
+> Choose 'Y' for all the questions afterwards
 
 
 **On Windows:**
 
-- Go to https://dev.mysql.com/downloads/installer/ to download the MYSQL installer
+Go to https://dev.mysql.com/downloads/installer/ to download the MYSQL installer
 
-- Follow setup instructions https://youtu.be/u96rVINbAUI. 
-    - Choose `8.0.xx` as the version
-    - OS: Windows
-    - In the installation type, you can choose Server Setup or Custom Setup to install the server + any add ons (i.e: MySQL Workbench)
-
+Follow setup instructions https://youtu.be/u96rVINbAUI. 
+- Choose `8.0.xx` as the version
+- OS: Windows
+- In the installation type, you can choose Server Setup or Custom Setup to install the server + any add ons (i.e: MySQL Workbench)
 - Save the root user password to connect to the database later
 
 
 5. Recreate the weather database using the sql file
 
-    - Log into mysql client with your password:
+Log into mysql client with your password:
     
-        `mysql -u root -p `
+`mysql -u root -p `
 
-    - Recreate the database:
+Recreate the database:
     
-        `> source weatherdb_backup.sql;`
+`> source weatherdb_backup.sql;`
 
-    - Check that the database was successfully created:
+Check that the database was successfully created:
 
-        `> USE WEATHER;`
+`> USE WEATHER;`
         
-        `> SHOW TABLES;`
+`> SHOW TABLES;`
 
-    - Exit the client:
+Exit the client:
     
-        `> quit`
+`> quit`
+
 
 <h3 id="conf">Configuration</h3>
 
-* Create the .env file:
-
+Create the .env file:
 `touch .env`
 
-* Add credentials & log path to a .env file
-
+Add credentials & log path to a .env file
 ```
 DB=WEATHER
 HOST=localhost
 USER=root
 PW=<your_password>
-LOG_FILE=/your/project/path/log/log.txt
+LOG_FILE=/your/project/path/etl/log/log.txt
 ```
 
-- The shell script provided in the `scripts` folder will be used to activate the virtual environment, run the server, and initiate the etl process.
+The shell script provided in the `scripts` folder will be used to activate the virtual environment, run the server, and initiate the etl process.
 
-- Complete the configuration by adding the paths for all the variables to the shell script:
+Complete the configuration by adding the paths for all the variables to the shell script:
 ```
 DATA_DIR="/path/to/your/project/etl/data"
 ETL_SCRIPT="/path/to/your/project/etl/etl_job.py"
@@ -151,10 +147,10 @@ Before intiating the ETL, populate the weather codes table. Do once only during 
 
 Initiate the ETL manually or set up a cronjob to run it on a regular schedule. 
 
-- Run once: 
+Run once: 
 `source ./resources/initiate_etl.sh`
 
-- Automate with crontab (use Task Scheduler for Windows):
+Automate with crontab (use Task Scheduler for Windows):
 `crontab -e`
 
 - Inside the crontab editor, add the following line of code which will run the ETL every hour. Replace `/path/to/shell_script.sh` with its actual path :
