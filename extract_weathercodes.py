@@ -12,6 +12,7 @@ PW = get_env_var('PW')
 def extract_codes(codes_file):
     conn = mysql.connector.connect(database=DB, host=HOST, username=USER, password=PW)
     cursor = conn.cursor()
+    multi_ins_count = 0
 
     with open(codes_file, 'r') as file:
         data = json.load(file)
@@ -20,9 +21,9 @@ def extract_codes(codes_file):
         for key, value in data.items():
             cursor.execute('INSERT INTO WEATHER_CODE(weather_code_id, weatherDesc) VALUES (%s, %s);', (key, value))
             conn.commit()
-            print('Insert success (ID %s)' % cursor.lastrowid)
+            multi_ins_count += cursor.rowcount
 
-        log_progress('Insert operation succeeded')    
+        log_progress('%s row(s) inserted into %s' % (multi_ins_count, 'WEATHER_CODE'))
 
     except Exception as e:
         conn.rollback()
