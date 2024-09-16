@@ -49,16 +49,11 @@ cd mysql-etl
 ```
 
 
-2. Setup the virtual environment (optional but recommended)
+2. Setup the virtual environment
 
 ```
 python3 -m venv <your_venv_name>
-
-source <your_venv_name>/bin/activate
 ```
-
->On Windows use: `venv\Scripts\activate` instead of `source venv/bin/activate`
-
 
 3. Install required packages
 
@@ -91,11 +86,11 @@ source <your_venv_name>/bin/activate
 - Go to https://dev.mysql.com/downloads/installer/ to download the MYSQL installer
 
 - Follow setup instructions https://youtu.be/u96rVINbAUI. 
-    - Choose V8.0.xx as the version
+    - Choose `8.0.xx` as the version
     - OS: Windows
     - In the installation type, you can choose Server Setup or Custom Setup to install the server + any add ons (i.e: MySQL Workbench)
 
-- Save the root user password to connect to the database
+- Save the root user password to connect to the database later
 
 
 5. Recreate the weather database using the sql file
@@ -110,9 +105,9 @@ source <your_venv_name>/bin/activate
 
     - Check that the database was successfully created:
 
-        `> use weather;`
+        `> USE WEATHER;`
         
-        `> show tables;`
+        `> SHOW TABLES;`
 
     - Exit the client:
     
@@ -124,7 +119,7 @@ source <your_venv_name>/bin/activate
 
 `touch .env`
 
-* Add credentials & log file path to a .env file
+* Add credentials & log path to a .env file
 
 ```
 DB=WEATHER
