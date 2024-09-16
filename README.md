@@ -73,6 +73,7 @@ To use MySQL commands without specifying the full path, you need to link it:
 `brew link mysql@8.0 --force `
 
 Run secure installation and set a password for the DB root user:
+
 `mysql_secure_installation`
 
 > Choose 'Y' for 'Set root password?' and enter your password. Save it for later to connect to the database 
