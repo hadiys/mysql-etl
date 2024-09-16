@@ -15,7 +15,7 @@ ETL Pipeline in Python that ingests weather data for loading into a MySQL databa
 
 ----
 
-## Project Overview
+<h2 id="project-overview">Project Overview</h2>
 
 This project features an ETL pipeline that can be automated to ingest data about the weather for any given location(s), using the [wttr.in API](https://wttr.in), and loads it into a MySQL database. The pipeline processes JSON data and loads it with respect to the relational model of the database.
 
@@ -24,6 +24,8 @@ The data includes detailed information about the weather, such as temperatures, 
 As the data pipeline can be automated, the dataset can grow quickly, which can be used for regular upstream loading into OLAP systems for analysis. This also creates a database system with large tables, closely mimicking real-world use cases to experiment with SQL workloads, query optimization, engine configuration, and more.
 
 ----
+
+<h2 id="features">Features</h2>
 
 ## Features
 1. Versatile extraction and load (configurable list of columns and values)
@@ -34,6 +36,8 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 ----
 
+<h2 id="technologies-used">Technologies Used</h2>
+
 ## Technologies Used
 1. Database: MySQL
 2. Programming Language: Python
@@ -42,8 +46,10 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 ----
 
-## Installation
+<h2 id="installation">Installation</h2>
+
 1. Clone the repository and go to its root directory:
+
     ```bash
     git clone https://github.com/hadiys/mysql-etl.git
     cd mysql-etl
@@ -75,9 +81,9 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
     
     **On Windows:**
-    Download and install MySQL from [here](https://dev.mysql.com/downloads/installer/).
+    Download and install MySQL from [here](https://dev.mysql.com/downloads/installer/)
     
-    Follow setup instructions https://youtu.be/u96rVINbAUI. 
+    Follow [setup instructions](https://youtu.be/u96rVINbAUI) 
     * Choose `8.0.xx` as the version
     * OS: Windows
     * In the installation type, you can choose Server Setup or Custom Setup to install the server + any add ons (i.e: MySQL Workbench)
@@ -91,7 +97,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
     `mysql -u root -p `
     
     Recreate the database and check that it was successfully created:
-    ```bash    
+   ```bash
     > source weatherdb_backup.sql;
     > USE WEATHER;
     > SHOW TABLES;
@@ -100,7 +106,8 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 ----
 
-## Configuration
+<h2 id="configuration">Configuration</h2>
+
 1. Create the `.env` file in the root of the project:
     ```bash
     touch .env
@@ -129,23 +136,26 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 ----
 
-## Usage
+<h2 id="usage">Usage</h2>
+
 1. Populate the weather codes table (once only):
+    
     ```bash
     python3 extract_weathercodes.py resources/wttr-codes.json
     ```
 
 2. Run the ETL manually or set up a cron job:
-    ```bash
+
+   ```bash
     source ./resources/initiate_etl.sh
     ```
 
-3. To automate with crontab:
+4. To automate with crontab:
     ```bash
     crontab -e
     ```
 
-4. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
+5. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
     ```bash
     * */1 * * * source /path/to/shell_script.sh
     ```
@@ -154,7 +164,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 > You can check the status of the operation in the log, or by logging into the MySQL server and querying the database 
 
 ----
-<h3 id="etl">ETL Process Description</h3>
+<h2 id="etl-process-description">ETL Process Description</h2>
 The ETL proceeds with respect to the relational model or schema of the data. Since the tables have parent-child relationships, parent tables are populated first, then intermediate tables (ones that are child and also parent) and child tables finally.
 
 The process begins when the `etl_job.py` script is called with an argument that specifies the json file containing our data, extracting/parsing data from json, generating SQL `INSERT` statement, and executing the statement against the database. 
@@ -164,7 +174,7 @@ The process is repeated for each entity in the database. If an error occurs duri
 A transaction consists of 1 row describing the current conditions, 3 rows describing 3-day forecast ahead of the current day, and 8 rows describing the forecast every 3 hours for each day. Therefore the transaction creates 28 rows across 3 tables. 
 
 ---
-<h3 id="d">Database Schema</h3>
+<h2 id="database-schema">Database Schema</h2>
 
 >To explore the full schema, run the commands `show tables` or `describe <table_name>` in MySQL Workbench or command-line client.
 
@@ -177,7 +187,7 @@ A transaction consists of 1 row describing the current conditions, 3 rows descri
 ![ERD DIAGRAM](images/WeatherSchemaMySQL.png)
 
 ---
-<h3 id="e">Error Handling</h3>
+<h2 id="error-handling">Error Handling</h2>
 
 Error is handled in 3 error-prone areas:
 1. The Python generic `Exception` type. This error is caught during execution for any of the parse functions in `extract.py`, which are responsible for extracting values from the json data.
@@ -189,7 +199,7 @@ Error is handled in 3 error-prone areas:
 
 >All of the above errors are logged to the log with the following format:<p>timestamp | executing function | message</p>
 
-<h3 id="l">License</h3>
+<h2 id="license">License</h2>
 MIT License
 
 Copyright (c) 2024 Hadi Saleh
