@@ -115,7 +115,7 @@ python3 extract_weathercodes.py resources/wttr-codes.json
 wget -q -O ./data/your_filename.json https://wttr/in/replace_with_city_name?=format=j1
 
 4. Run the etl script using the following command:
-python3 etl_job.py <path_to_json_file>
+python3 etl_job.py ./data/your_filename.json
 
 5. Log into your MySQL Workbench or mysql command line client then run the following statements to check that the data has been successfully loaded:
 USE WEATHER
@@ -159,3 +159,6 @@ All of the above errors are logged to the log file specified in the .env variabl
 Log format: Timestamp | Executing function | Error message
 
 # License #
+
+# mysql-etl
+ETL Pipeline in Python that ingests weather data for loading into a MySQL database
