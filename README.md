@@ -46,6 +46,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 <h2 id="installation">Installation</h2>
 1. Clone the repository and go to its root directory:
+
     ```bash
     git clone https://github.com/hadiys/mysql-etl.git
     cd mysql-etl
@@ -77,9 +78,9 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
     
     **On Windows:**
-    Download and install MySQL from [here](https://dev.mysql.com/downloads/installer/).
+    Download and install MySQL from [here](https://dev.mysql.com/downloads/installer/)
     
-    Follow setup instructions https://youtu.be/u96rVINbAUI. 
+    Follow [setup instructions](https://youtu.be/u96rVINbAUI) 
     * Choose `8.0.xx` as the version
     * OS: Windows
     * In the installation type, you can choose Server Setup or Custom Setup to install the server + any add ons (i.e: MySQL Workbench)
@@ -104,6 +105,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 <h2 id="configuration">Configuration</h2>
 1. Create the `.env` file in the root of the project:
+
     ```bash
     touch .env
     ```
@@ -133,21 +135,23 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 <h2 id="usage">Usage</h2>
 1. Populate the weather codes table (once only):
+    
     ```bash
     python3 extract_weathercodes.py resources/wttr-codes.json
     ```
 
 2. Run the ETL manually or set up a cron job:
-    ```bash
+
+   ```bash
     source ./resources/initiate_etl.sh
     ```
 
-3. To automate with crontab:
+4. To automate with crontab:
     ```bash
     crontab -e
     ```
 
-4. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
+5. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
     ```bash
     * */1 * * * source /path/to/shell_script.sh
     ```
