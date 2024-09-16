@@ -134,53 +134,44 @@ PW=<your_password>
 LOG_FILE=/your/project/path/log/log.txt
 ```
 
+- The shell script provided in the `scripts` folder will be used to activate the virtual environment, run the server, and initiate the etl process.
+
+- Complete the configuration by adding the paths for all the variables to the shell script:
+```
+DATA_DIR="/path/to/your/project/etl/data"
+ETL_SCRIPT="/path/to/your/project/etl/etl_job.py"
+LOG_SCRIPT="/path/to/your/project/etl/log.py"
+SERVER_START="/path/to/mysql/bin/mysql.server start"
+SERVER_STOP="/path/to/mysql/bin/mysql.server stop"
+PYENV="/path/to/python_venv/bin/activate"
+PY3="/path/to/python/bin/python3"
+WGET="/path/to/wget/wget"
+```
 
 <h3 id="u">Usage</h3>
 
-1. Start the MySQL server
-
-`mysql.server start`
-
-2. Activate the virtual environment
-
-`source path/to/venv/activate`
-
-3. Populate the weather codes table (do once only):
+Before intiating the ETL, populate the weather codes table. Do once only during setup:
 
 `python3 extract_weathercodes.py resources/wttr-codes.json`
 
-4. Download the weather data from the weather API:
+Initiate the ETL manually or set up a cronjob to run it on a regular schedule. 
 
-`wget -q -O ./data/your_filename.json https://wttr/in/replace_with_city_name?=format=j1`
+- Run once: 
+`source ./resources/initiate_etl.sh`
 
-5. Run the etl script using the following command:
+- Automate with crontab (use Task Scheduler for Windows):
+`crontab -e`
 
-`python3 etl_job.py ./data/your_filename.json`
+- Inside the crontab editor, add the following line of code which will run the ETL every hour. Replace `/path/to/shell_script.sh` with its actual path :
+`* */1 * * * source /path/to/shell_script.sh`
 
-5. Log into your MySQL Workbench or mysql command line client then run the following statements to check that the data has been successfully loaded:
-```
-USE WEATHER;
-SELECT * FROM NEAREST_AREA;
-SELECT * FROM CURRENT_CONDITIONS;
-SELECT * FROM DAILY_FORECAST;
-SELECT * FROM HOURLY_FORECAST;
-```
+> You can check the status of the operation in the log file or by querying your database by logging into your MySQL Workbench or mysql command line client
     
-6. Stop the server when done
-
-`mysql.server stop`
-
 <h3 id="etl">ETL Process Description</h3>
 
 **Overview**
 
 The ETL proceeds with respect to the relational model or schema of the data. Since the tables have parent-child relationships, parent tables are populated first, then intermediate tables (ones that are child and also parent) and child tables finally.
-
-**A note on automation**
-
-The automation of the ETL process can be done by setting up a shell script to run all the steps mentioned in the Usage section.
-
-_Link to shell script in scripts folder_
 
 The process begins when the `etl_job.py` script is called with an argument that specifies the json file containing our data, extracting/parsing data from json, generating SQL `INSERT` statement, and executing the statement against the database. 
 
