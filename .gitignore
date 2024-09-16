@@ -1,6 +1,6 @@
 .env
+!resources/.env
 test.py
-./data/*
-*.sh
+test.sh
+initiate_etl_local.sh
 __pycache__
-README.md

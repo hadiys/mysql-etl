@@ -13,7 +13,10 @@ def log_progress(message, fn=None):
     with open(log_file, "a") as f:
         f.write(timestamp + ' ' + calling_fn + ': ' + message + '\n')
 
-if len(sys.argv) > 2:
-    log_progress(sys.argv[1], sys.argv[2])
-else:
-    log_progress(sys.argv[1])
+if __name__ == "__main__":
+    # The script can be called with 3 arguments: script.py file.json custom_caller_name
+    if len(sys.argv) > 2:
+        log_progress(sys.argv[1], sys.argv[2])
+    # Or with 2 arguments: script.py file.json
+    else:
+        log_progress(sys.argv[1])
