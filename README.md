@@ -27,7 +27,6 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 <h2 id="features">Features</h2>
 
-## Features
 1. Versatile extraction and load (configurable list of columns and values)
 2. Transactional (all or none)
 3. Error & progress logging
@@ -38,7 +37,6 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 <h2 id="technologies-used">Technologies Used</h2>
 
-## Technologies Used
 1. Database: MySQL
 2. Programming Language: Python
 3. Packages: mysql-connector, json
@@ -165,9 +163,10 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
 
 ----
 <h2 id="etl-process-description">ETL Process Description</h2>
+
 The ETL proceeds with respect to the relational model or schema of the data. Since the tables have parent-child relationships, parent tables are populated first, then intermediate tables (ones that are child and also parent) and child tables finally.
 
-The process begins when the `etl_job.py` script is called with an argument that specifies the json file containing our data, extracting/parsing data from json, generating SQL `INSERT` statement, and executing the statement against the database. 
+The process begins when the `etl_job.py` script is called with an argument that specifies the json file, to extract data from json, generate SQL `INSERT` statements, and execute the statement against the database. 
 
 The process is repeated for each entity in the database. If an error occurs during any phase of the ETL, the MySQL transaction is aborted to ensure data consistency in the database and the error is appended to the log file. 
 
