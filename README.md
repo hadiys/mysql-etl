@@ -141,20 +141,20 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
     python3 extract_weathercodes.py resources/wttr-codes.json
     ```
 
-2. Run the ETL manually or set up a cron job:
+2. Run the ETL manually or set up a cron job (Use Task Scheduler for Windows):
 
    ```bash
-    source ./resources/initiate_etl.sh
+    source ./scripts/initiate_etl.sh
     ```
 
-4. To automate with crontab:
+3. To automate with crontab:
     ```bash
     crontab -e
     ```
 
-5. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
+4. Add this line to the cron editor to run the ETL every hour. Replace with actual path:
     ```bash
-    * */1 * * * source /path/to/shell_script.sh
+    * */1 * * * source /path/to/your/project/etl/scripts/initiate_etl.sh
     ```
 
 
