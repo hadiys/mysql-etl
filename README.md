@@ -96,8 +96,7 @@ As the data pipeline can be automated, the dataset can grow quickly, which can b
     
     Recreate the database and check that it was successfully created:
    ```bash
-    > source weatherdb_backup.sql;
-    > USE WEATHER;
+    > source resources/weatherdb.sql;
     > SHOW TABLES;
     > quit
     ```
