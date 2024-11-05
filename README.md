@@ -21,7 +21,7 @@ This project features an ETL pipeline that can be automated to ingest data about
 
 The data includes detailed information about the weather, such as temperatures, chance of sunshine/rain/overcast, pressures, latitude and longitude of the location, and more. For each city, we can find the current conditions, a 3-day forecast, and 3-hourly forecasted conditions for each day's forecast.
 
-As the data pipeline can be automated, the dataset can grow quickly, which can be used for regular upstream loading into OLAP systems for analysis. This also creates a database system with large tables, closely mimicking real-world use cases to experiment with SQL workloads, query optimization, engine configuration, and more.
+As the data pipeline can be automated, the dataset can grow quickly, which can be used for regular downstream loading into OLAP systems for analysis. This also creates a database system with large tables, closely mimicking real-world use cases to experiment with SQL workloads, query optimization, engine configuration, and more.
 
 ----
 
